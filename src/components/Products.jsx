@@ -1,4 +1,4 @@
-import React, { useState, useEffect , useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
 
@@ -23,14 +23,14 @@ const Products = () => {
     const getProducts = async () => {
       setLoading(true);
       const response = await fetch("https://fakestoreapi.com/products/");
-      if (componentMounted) {
+      if (componentMounted.current) {
         setData(await response.clone().json());
         setFilter(await response.json());
         setLoading(false);
       }
 
       return () => {
-        componentMounted = false;
+        componentMounted.current = false;
       };
     };
 
